@@ -1,0 +1,1 @@
+{"ts": 1723500000, "ts_iso": "2025-08-13T00:00:00Z", "request_id": "example-req-1", "endpoint": "POST /proxy/openai/v1/chat/completions", "status": "ok", "input_hash": "...", "output_hash": "...", "params_snapshot": {"model": "gpt-4o-mini"}, "policy_hash": null, "code_git_sha": null, "prev_hash": null, "hash": "..."}

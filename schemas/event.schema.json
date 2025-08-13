@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://remcode.ai/schemas/event.schema.json",
+  "title": "Verified Inference Event (MVP)",
+  "type": "object",
+  "required": ["event_id", "ts", "actor", "model", "inputs", "outputs", "event_hash"],
+  "properties": {
+    "event_id": {"type": "string", "description": "UUID of the event"},
+    "ts": {"type": "string", "format": "date-time"},
+    "tenant": {"type": "string"},
+    "session_id": {"type": "string"},
+    "actor": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {"type": "string", "enum": ["human", "model", "tool"]},
+        "id": {"type": "string"}
+      }
+    },
+    "model": {
+      "type": "object",
+      "required": ["provider", "name"],
+      "properties": {
+        "provider": {"type": "string"},
+        "name": {"type": "string"},
+        "params": {"type": "object", "additionalProperties": true}
+      }
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "prompt_sha256": {"type": "string"},
+        "attachments_sha256": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "properties": {
+        "text_sha256": {"type": "string"},
+        "citations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uri": {"type": "string"},
+              "sha256": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "policy_decision": {
+      "type": "object",
+      "properties": {
+        "rules": {"type": "array", "items": {"type": "string"}},
+        "action": {"type": "string"}
+      }
+    },
+    "chunk_hash": {"type": "string"},
+    "prev_event_hash": {"type": "string"},
+    "event_hash": {"type": "string"}
+  },
+  "additionalProperties": true
+}
+
+
