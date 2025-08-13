@@ -42,3 +42,8 @@ See `docs/evidence_pack_spec_v0_1.md`.
 
 ## License
 Apache-2.0
+
+## Contact
+SYNOVA WHISPER Inc.
+www.synovawhisper.com
+info@synova-w.com
