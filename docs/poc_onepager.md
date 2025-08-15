@@ -80,6 +80,5 @@
 ---
 
 Contacts / 連絡先 / 联系方式
-- Email: <your email>
-- Calendly: <your link>
+- Email: <info@synova-w.com>
 - Repo: https://github.com/SYNOVAW/REM-Evidence
