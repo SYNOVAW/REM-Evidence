@@ -47,3 +47,10 @@ Apache-2.0
 SYNOVA WHISPER Inc.
 www.synovawhisper.com
 info@synova-w.com
+
+## Docs
+- Spec: docs/evidence_pack_spec_v0_1.md
+- API Reference: docs/api_reference.md
+- Security & Compliance: docs/security_compliance.md
+- FAQ: docs/faq.md
+- PoC One-Pager (CN/JP/EN): docs/poc_onepager.md

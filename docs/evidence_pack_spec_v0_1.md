@@ -3,6 +3,7 @@
 ## Directory Layout (zip)
 - MANIFEST.json, MANIFEST.sig.json
 - metrics.json (requests/errors summary and p50/p90/p95/p99 latency)
+  - includes SR summary (count/p50/p90/p95)
 - docs/cover.pdf, docs/signature_page.pdf
 - policies/*.md|.json|.csv (tech_doc, regmap, roi_sources, monitoring_plan, coverage_matrix, GDPR/DORA/eIDAS templates)
 - audit/audit_*.jsonl, audit/incidents.jsonl (if any)
@@ -17,20 +18,25 @@
 - Streaming SSE:
   - event: rem.chunk (sha256 per SSE data frame, optional via env SSE_CHUNK_SIGNING=1)
   - event: rem.manifest (final sha256 and signer_id injected before stream end)
+  - Compatibility: does not alter vendor data frames; custom events use standard SSE framing
 
 ## Replay
 - `audit/repro/inference_replay.py` consumes a single JSONL line; customers may extend to full pipeline replay
 - Determinism targets: >=0.99 where seeds/params fixed
+ - Snapshot: model, messages/system, temperature, top_p, seed, tools (names/params), vendor options (truncated with hashes)
 
 ## Privacy & Truncation
 - Sensitive headers/fields (Authorization, API keys, tokens, secrets, passwords) are scrubbed to *** before logging.
 - Large strings and arrays are truncated (default string<=2000 chars, list<=50 items) to prevent excessive payloads in chain.
+ - Params snapshot truncation policy is applied before hashing; original full payloads are not stored.
 
 ## Mappings
 - AI Act Annex IV: link to `policies/tech_doc.md` sections; logs: Art.12/18; PMS: monitoring_plan.md; incidents: incidents.jsonl
 - DORA: RoI via roi_sources.json/`/audit/roi`; incidents; BCP/RTO/RPO in coverage_matrix.csv
 - ISO 42001: management mapping via regmap.json
+ - GDPR: ROPA (`policies/ropa.json`), DPIA (`policies/dpia.md`), DPA (`policies/dpa_template.md`)
 
 ## SLA Targets (demo)
 - 48h pack from unfamiliar data
 - Runtime overhead <=80ms (export not included)
+ - Capture rate >=98%, Replay determinism >=99%
