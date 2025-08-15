@@ -54,3 +54,5 @@ info@synova-w.com
 - Security & Compliance: docs/security_compliance.md
 - FAQ: docs/faq.md
 - PoC One-Pager (CN/JP/EN): docs/poc_onepager.md
+
+- Sample pack: examples/audit_pack_sample.zip
